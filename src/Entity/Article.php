@@ -40,9 +40,13 @@ class Article
     #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'id_article')]
     private Collection $id_category;
 
+    #[ORM\OneToMany(mappedBy: 'id_article', targetEntity: Commentaire::class, orphanRemoval: true)]
+    private Collection $id_commentaires;
+
     public function __construct()
     {
         $this->id_category = new ArrayCollection();
+        $this->id_commentaires = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -156,6 +160,36 @@ class Article
     {
         if ($this->id_category->removeElement($idCategory)) {
             $idCategory->removeIdArticle($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Commentaire>
+     */
+    public function getIdCommentaires(): Collection
+    {
+        return $this->id_commentaires;
+    }
+
+    public function addIdCommentaire(Commentaire $idCommentaire): static
+    {
+        if (!$this->id_commentaires->contains($idCommentaire)) {
+            $this->id_commentaires->add($idCommentaire);
+            $idCommentaire->setIdArticle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIdCommentaire(Commentaire $idCommentaire): static
+    {
+        if ($this->id_commentaires->removeElement($idCommentaire)) {
+            // set the owning side to null (unless already changed)
+            if ($idCommentaire->getIdArticle() === $this) {
+                $idCommentaire->setIdArticle(null);
+            }
         }
 
         return $this;
