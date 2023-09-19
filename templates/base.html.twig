@@ -13,6 +13,41 @@
         {% endblock %}
     </head>
     <body>
+        <nav class="py-2 bg-dark border-bottom">
+            <div class="container d-flex flex-wrap justify-content-center">
+                <a class="nav nav-link text-white" role="button" aria-expanded="false">Accueil</a>
+                <a class="nav nav-link text-white" role="button" aria-expanded="false">​À propos</a>
+                <a class="nav nav-link text-white" role="button" aria-expanded="false">Formation</a>
+                <a class="nav nav-link text-white" role="button" aria-expanded="false">Actualités</a>
+                <a class="nav nav-link text-white" role="button" aria-expanded="false">Infos utiles</a>
+                <a class="nav nav-link text-white" role="button" aria-expanded="false">Contact</a>
+            </div>
+        </nav>
+
+        <div class="container">
+            <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+                <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="{{ path('app_home') }}">
+                    <span class="fs-4">PasSage Avenir</span>
+                </a>
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">S'inscrire</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" href="#">Se connecter</a>
+                    </li>
+                </ul>
+            </header>
+        </div>
+
         {% block body %}{% endblock %}
+
+        <div class="container">
+            <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+                <div class="col-md-4 d-flex align-items-center">
+                    <span class="copyright">©{{'now'|date('Y') }} PasSage Avenir - Sandrine Hennebelle</span>
+                </div>
+            </footer>
+        </div>
     </body>
 </html>

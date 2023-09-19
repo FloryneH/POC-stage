@@ -3,18 +3,83 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <main class="container">
+        <div class="row">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+            <div>
+                <h3 class="pb-4 mb-4 border-bottom">À propos de moi</h3>
+                <div>
+                    <p>
+                        Salut, je suis Étoile Lunaire, votre guide astral vers une carrière qui pourrait être basée sur le positionnement des étoiles, si vous y croyez ! Avec des années d'expérience à lire les signes du zodiaque et à interpréter les mouvements célestes, je suis prête à vous aider à aligner vos chakras professionnels.
+                        <br>
+                        Ma mission est de vous guider à travers les méandres mystérieux de l'astrologie afin que vous puissiez prendre des décisions professionnelles, enfin, basées sur les planètes. En tant qu'experte auto-proclamée en alignement des étoiles, je vais révéler comment Mercure rétrograde pourrait potentiellement affecter votre choix de carrière.
+                    </p>
+                </div>
+            </div>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Acs/OneDrive/Documents/POC-stage/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Acs/OneDrive/Documents/POC-stage/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+            <div class="row">
+                <h3 class="pb-4 mb-4 border-bottom">Mes dérnières actualités</h3>
+
+                <div class="d-flex justify-content-evenly">
+                    <div class="card" style="width: 40%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Comment Choisir Votre Carrière en Fonction de Votre Signe Astrologique</h5>
+                            <p class="card-text">Êtes-vous fatigué de choisir votre carrière en fonction de vos compétences, de vos intérêts et de la demande du marché du travail ? Ne cherchez pas plus loin, car Étoile Lunaire est là pour vous montrer comment décoder les signes du zodiaque et aligner votre avenir professionnel avec les étoiles !</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 40%;">
+                        <div class="card-body">
+                            <h5 class="card-title"> L'Élément Mystique Qui Peut Transformer Votre Vie</h5>
+                            <p class="card-text">La magie, telle une brise légère et insaisissable, insuffle un charme mystique dans notre existence. Elle nous rappelle que la réalité est bien plus complexe et merveilleuse que ce que nos yeux voient. Que ce soit à travers les contes de fées, les rituels ésotériques ou les moments d'émerveillement quotidien, la magie nous invite à croire en l'extraordinaire et à embrasser l'inconnu avec curiosité et émerveillement. Elle se cache dans les petits détails de la vie, prête à être découverte par ceux qui ont le cœur ouvert à la magie qui nous entoure.</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="row">
+                <h3 class="pb-4 mb-4 border-bottom">Mes prochaines formations</h3>
+
+                <div class="d-flex justify-content-evenly flex-wrap">
+                    <div class="card" style="width: 40%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Maîtrise de l'Art Occulte : Formation en Sorcellerie Moderne</h5>
+                            <p class="card-text">Devenez un sorcier moderne en apprenant les secrets ancestraux de la sorcellerie, de la potion magique au vol sur balai.</p>
+                            <a href="#" class="btn btn-primary">Abracadabra</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 40%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Étoiles et Carrière : Utilisez l'Astrologie pour Guider Votre Succès</h5>
+                            <p class="card-text">Découvrez comment utiliser les constellations pour éclairer votre chemin professionnel et manifester vos rêves.</p>
+                            <a href="#" class="btn btn-primary">Zodiaclique</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 40%;">
+                        <div class="card-body">
+                            <h5 class="card-title">Énergies Cachées : Formation en Gestion d'Énergie Vitale</h5>
+                            <p class="card-text">Explorez le monde mystérieux de l'énergie vitale et apprenez à canaliser vos pouvoirs pour atteindre l'épanouissement personnel.</p>
+                            <a href="#" class="btn btn-primary">Énergizant</a>
+                        </div>
+                    </div>
+
+                    <div class="card" style="width: 40%;">
+                        <div class="card-body">
+                            <h5 class="card-title">L'Art de la Magie de Bureau : Transformez Votre Travail en Enchantement</h5>
+                            <p class="card-text">Transformez votre vie de bureau en un lieu magique où les réunions se transforment en potions d'inspiration et les e-mails en messages mystiques.</p>
+                            <a href="#" class="btn btn-primary">Bureau-magique</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+    </main>
 {% endblock %}
