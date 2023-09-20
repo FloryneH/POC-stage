@@ -47,7 +47,7 @@ class DashboardController extends AbstractDashboardController
         ]);
 
         yield MenuItem::subMenu('Formations', 'fas fa-newspaper')->setSubItems([
-            MenuItem::linkToCrud('Toustes les formations', 'fas fa-newspaper', Formation::class),
+            MenuItem::linkToCrud('Toutes les formations', 'fas fa-newspaper', Formation::class),
             MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Formation::class)->setAction(Crud::PAGE_NEW),
             MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class),
         ]);

@@ -9,7 +9,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: FormationRepository::class)]
-class Formation 
+class Formation
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,7 +17,10 @@ class Formation
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $nom = null;
+    private ?string $name = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $slug = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $content = null;
@@ -26,12 +29,9 @@ class Formation
     private ?\DateTimeInterface $date = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $lieu = null;
-
-    #[ORM\Column(length: 255, nullable: true)]
     private ?string $media_filename = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'id_formaion')]
+    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'id_formation')]
     private Collection $id_category;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'id_formation')]
@@ -52,14 +52,26 @@ class Formation
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getName(): ?string
     {
-        return $this->nom;
+        return $this->name;
     }
 
-    public function setNom(string $nom): static
+    public function setName(string $name): static
     {
-        $this->nom = $nom;
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function getSlug(): ?string
+    {
+        return $this->slug;
+    }
+
+    public function setSlug(string $slug): static
+    {
+        $this->slug = $slug;
 
         return $this;
     }
@@ -88,18 +100,6 @@ class Formation
         return $this;
     }
 
-    public function getLieu(): ?string
-    {
-        return $this->lieu;
-    }
-
-    public function setLieu(?string $lieu): static
-    {
-        $this->lieu = $lieu;
-
-        return $this;
-    }
-
     public function getMediaFilename(): ?string
     {
         return $this->media_filename;
@@ -124,7 +124,7 @@ class Formation
     {
         if (!$this->id_category->contains($idCategory)) {
             $this->id_category->add($idCategory);
-            $idCategory->addIdFormaion($this);
+            $idCategory->addIdFormation($this);
         }
 
         return $this;
@@ -133,7 +133,7 @@ class Formation
     public function removeIdCategory(Category $idCategory): static
     {
         if ($this->id_category->removeElement($idCategory)) {
-            $idCategory->removeIdFormaion($this);
+            $idCategory->removeIdFormation($this);
         }
 
         return $this;

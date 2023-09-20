@@ -25,12 +25,12 @@ class Category
     private Collection $id_article;
 
     #[ORM\ManyToMany(targetEntity: Formation::class, inversedBy: 'id_category')]
-    private Collection $id_formaion;
+    private Collection $id_formation;
 
     public function __construct()
     {
         $this->id_article = new ArrayCollection();
-        $this->id_formaion = new ArrayCollection();
+        $this->id_formation = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -89,23 +89,23 @@ class Category
     /**
      * @return Collection<int, Formation>
      */
-    public function getIdFormaion(): Collection
+    public function getIdFormation(): Collection
     {
-        return $this->id_formaion;
+        return $this->id_formation;
     }
 
-    public function addIdFormaion(Formation $idFormaion): static
+    public function addIdFormation(Formation $idFormation): static
     {
-        if (!$this->id_formaion->contains($idFormaion)) {
-            $this->id_formaion->add($idFormaion);
+        if (!$this->id_formation->contains($idFormation)) {
+            $this->id_formation->add($idFormation);
         }
 
         return $this;
     }
 
-    public function removeIdFormaion(Formation $idFormaion): static
+    public function removeIdFormation(Formation $idFormation): static
     {
-        $this->id_formaion->removeElement($idFormaion);
+        $this->id_formation->removeElement($idFormation);
 
         return $this;
     }

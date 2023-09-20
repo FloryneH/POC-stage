@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class FormationController extends AbstractController
 {
     #[Route('/formation/{slug}', name: 'formation_show')]
-    public function show(): Response
+    public function index(): Response
     {
         return $this->render('formation/index.html.twig', [
             'controller_name' => 'FormationController',
