@@ -21,7 +21,7 @@ class Category
     #[ORM\Column(length: 255)]
     private ?string $slug = null;
 
-    #[ORM\ManyToMany(targetEntity: Article::class, inversedBy: 'id_category')]
+    #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'id_category')]
     private Collection $id_article;
 
     #[ORM\ManyToMany(targetEntity: Formation::class, inversedBy: 'id_category')]
@@ -108,5 +108,10 @@ class Category
         $this->id_formation->removeElement($idFormation);
 
         return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->name;
     }
 }
