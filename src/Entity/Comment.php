@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\CommentaireRepository;
+use App\Repository\CommentRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: CommentaireRepository::class)]
-class Commentaire 
+#[ORM\Entity(repositoryClass: CommentRepository::class)]
+class Comment
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -20,13 +20,13 @@ class Commentaire
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
-    #[ORM\ManyToOne(inversedBy: 'id_commentaires')]
+    #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?User $id_user = null;
+    private ?Article $article = null;
 
-    #[ORM\ManyToOne(inversedBy: 'id_commentaires')]
+    #[ORM\ManyToOne(inversedBy: 'comments')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Article $id_article = null;
+    private ?User $user = null;
 
     public function getId(): ?int
     {
@@ -57,26 +57,26 @@ class Commentaire
         return $this;
     }
 
-    public function getIdUser(): ?User
+    public function getArticle(): ?Article
     {
-        return $this->id_user;
+        return $this->article;
     }
 
-    public function setIdUser(?User $id_user): static
+    public function setArticle(?Article $article): static
     {
-        $this->id_user = $id_user;
+        $this->article = $article;
 
         return $this;
     }
 
-    public function getIdArticle(): ?Article
+    public function getUser(): ?User
     {
-        return $this->id_article;
+        return $this->user;
     }
 
-    public function setIdArticle(?Article $id_article): static
+    public function setUser(?User $user): static
     {
-        $this->id_article = $id_article;
+        $this->user = $user;
 
         return $this;
     }

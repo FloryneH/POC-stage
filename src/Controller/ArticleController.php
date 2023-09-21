@@ -17,11 +17,11 @@ class ArticleController extends AbstractController
         if (!$article) {
             return $this->redirectToRoute('app_home');
         }
-        // $comment = new Comment($article);
-        // $commentForm = $this->createForm(CommentType::class, $comment);
-        // return $this->render('article/show.html.twig', [
-        //     'article'=>$article,
-        //     'commentForm'=>$commentForm,
-        // ]);
+        $comment = new Comment($article);
+        $commentForm = $this->createForm(CommentType::class, $comment);
+        return $this->render('article/show.html.twig', [
+            'article'=>$article,
+            'commentForm'=>$commentForm,
+        ]);
     }
 }

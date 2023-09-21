@@ -1,14 +1,14 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}{{article.title}}{% endblock %}
+{% block title %}{{article.titre}}{% endblock %}
 
 {% block body %}
     <div class="container">
-        <h1>{{article.title}}</h1>
+        <h1>{{article.titre}}</h1>
         <hr>
         {{article.content|raw}}
 
-        {# <h2 class="comment-title mt-5">
+        <h2 class="comment-title mt-5">
             <span class="comment-count">{{article.comments|length}} commentaire(s)</span>
         </h2>
         <hr>
@@ -23,6 +23,6 @@
             {% for comment in article.comments %}
                 {% include "comment/index.html.twig" with [comment] %}
             {% endfor %}
-        </div> #}
+        </div>
     </div>
 {% endblock %}

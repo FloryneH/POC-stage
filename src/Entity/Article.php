@@ -41,13 +41,15 @@ class Article implements TimestampedInterface
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'id_article')]
     private Collection $id_category;
 
-    #[ORM\OneToMany(mappedBy: 'id_article', targetEntity: Commentaire::class, orphanRemoval: true)]
-    private Collection $id_commentaires;
+    #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comments;
+
 
     public function __construct()
     {
         $this->id_category = new ArrayCollection();
-        $this->id_commentaires = new ArrayCollection();
+        // $this->id_commentaires = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -166,38 +168,38 @@ class Article implements TimestampedInterface
         return $this;
     }
 
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getIdCommentaires(): Collection
+    public function __toString(): string
     {
-        return $this->id_commentaires;
+        return $this->titre;
     }
 
-    public function addIdCommentaire(Commentaire $idCommentaire): static
+    /**
+     * @return Collection<int, Comment>
+     */
+    public function getComments(): Collection
     {
-        if (!$this->id_commentaires->contains($idCommentaire)) {
-            $this->id_commentaires->add($idCommentaire);
-            $idCommentaire->setIdArticle($this);
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): static
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setArticle($this);
         }
 
         return $this;
     }
 
-    public function removeIdCommentaire(Commentaire $idCommentaire): static
+    public function removeComment(Comment $comment): static
     {
-        if ($this->id_commentaires->removeElement($idCommentaire)) {
+        if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($idCommentaire->getIdArticle() === $this) {
-                $idCommentaire->setIdArticle(null);
+            if ($comment->getArticle() === $this) {
+                $comment->setArticle(null);
             }
         }
 
         return $this;
-    }
-
-    public function __toString(): string
-    {
-        return $this->titre;
     }
 }

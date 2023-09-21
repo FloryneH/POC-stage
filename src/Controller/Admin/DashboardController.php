@@ -4,7 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Category;
-use App\Entity\Commentaire;
+use App\Entity\Comment;
 use App\Entity\Formation;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -52,6 +52,6 @@ class DashboardController extends AbstractDashboardController
             MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class),
         ]);
 
-        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Commentaire::class);
+        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
     }
 }

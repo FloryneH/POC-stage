@@ -6,10 +6,12 @@ use App\Repository\UserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -29,20 +31,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?string $password = null;
 
-    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'id_user')]
-    private Collection $id_formation;
+    #[ORM\Column(length: 255)]
+    private ?string $username = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Note::class)]
-    private Collection $id_note;
+    #[ORM\Column(length: 255)]
+    private ?string $prenom = null;
 
-    #[ORM\OneToMany(mappedBy: 'id_user', targetEntity: Commentaire::class, orphanRemoval: true)]
-    private Collection $id_commentaires;
+    #[ORM\Column(length: 255)]
+    private ?string $nom = null;
+
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Comment::class, orphanRemoval: true)]
+    private Collection $comments;
 
     public function __construct()
     {
-        $this->id_formation = new ArrayCollection();
-        $this->id_note = new ArrayCollection();
-        $this->id_commentaires = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -115,87 +118,71 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+
+    public function setUsername(string $username): static
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): static
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function __toString(): string
+    {
+        return $this->username;
+    }
+
     /**
-     * @return Collection<int, Formation>
+     * @return Collection<int, Comment>
      */
-    public function getIdFormation(): Collection
+    public function getComments(): Collection
     {
-        return $this->id_formation;
+        return $this->comments;
     }
 
-    public function addIdFormation(Formation $idFormation): static
+    public function addComment(Comment $comment): static
     {
-        if (!$this->id_formation->contains($idFormation)) {
-            $this->id_formation->add($idFormation);
-            $idFormation->addIdUser($this);
+        if (!$this->comments->contains($comment)) {
+            $this->comments->add($comment);
+            $comment->setUser($this);
         }
 
         return $this;
     }
 
-    public function removeIdFormation(Formation $idFormation): static
+    public function removeComment(Comment $comment): static
     {
-        if ($this->id_formation->removeElement($idFormation)) {
-            $idFormation->removeIdUser($this);
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Note>
-     */
-    public function getIdNote(): Collection
-    {
-        return $this->id_note;
-    }
-
-    public function addIdNote(Note $idNote): static
-    {
-        if (!$this->id_note->contains($idNote)) {
-            $this->id_note->add($idNote);
-            $idNote->setIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdNote(Note $idNote): static
-    {
-        if ($this->id_note->removeElement($idNote)) {
+        if ($this->comments->removeElement($comment)) {
             // set the owning side to null (unless already changed)
-            if ($idNote->getIdUser() === $this) {
-                $idNote->setIdUser(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, Commentaire>
-     */
-    public function getIdCommentaires(): Collection
-    {
-        return $this->id_commentaires;
-    }
-
-    public function addIdCommentaire(Commentaire $idCommentaire): static
-    {
-        if (!$this->id_commentaires->contains($idCommentaire)) {
-            $this->id_commentaires->add($idCommentaire);
-            $idCommentaire->setIdUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeIdCommentaire(Commentaire $idCommentaire): static
-    {
-        if ($this->id_commentaires->removeElement($idCommentaire)) {
-            // set the owning side to null (unless already changed)
-            if ($idCommentaire->getIdUser() === $this) {
-                $idCommentaire->setIdUser(null);
+            if ($comment->getUser() === $this) {
+                $comment->setUser(null);
             }
         }
 
