@@ -48,7 +48,6 @@ class Article implements TimestampedInterface
     public function __construct()
     {
         $this->id_category = new ArrayCollection();
-        // $this->id_commentaires = new ArrayCollection();
         $this->comments = new ArrayCollection();
     }
 

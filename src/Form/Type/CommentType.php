@@ -4,6 +4,7 @@ namespace App\Form\Type;
 
 use App\Entity\Article;
 use App\Entity\Comment;
+use Symfony\Component\BrowserKit\Request;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -26,8 +27,8 @@ class CommentType extends AbstractType
             ]);
         $builder->get('article')
             ->addModelTransformer(new CallbackTransformer(
-                fn(?Article $article) => $article ? $article->getId() : null, // Transformation en ID
-                fn($articleId) => $articleId // Transformation inverse (non nécessaire ici)
+                fn(Article $article) => $article->getId(),
+                fn(Article $article) => $article->getTitre(),
             ));
     }
     public function configureOptions(OptionsResolver $resolver)
@@ -37,4 +38,5 @@ class CommentType extends AbstractType
             'csrf_token_id' => 'comment-add',
         ]);
     }
+    
 }

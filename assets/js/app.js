@@ -1,5 +1,4 @@
 import '../css/app.scss';
-import {Dropdown} from "bootstbrap";
 
 document.addEventListener('DOMContentLoaded', () => {
     new App();

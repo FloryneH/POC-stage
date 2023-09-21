@@ -5,19 +5,17 @@ namespace App\Controller;
 use App\Entity\Comment;
 use App\Repository\ArticleRepository;
 use App\Repository\CommentRepository;
-use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
-use SebastianBergmann\Environment\Console;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
 class CommentController extends AbstractController
 {
     #[Route('/ajax/comments', name: 'comment_add')]
-    public function add(Request $request, ArticleRepository $articleRepo, CommentRepository $commentRepo, EntityManagerInterface $em, UserRepository $userRepo): Response
+    public function add(Request $request, ArticleRepository $articleRepo, CommentRepository $commentRepo, EntityManagerInterface $em): Response
     {
         $commentData = $request->request->all('comment');
         if (!$this->isCsrfTokenValid('comment-add', $commentData['_token'])) {
