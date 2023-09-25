@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Formation;
+use App\Entity\Media;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
@@ -60,6 +61,11 @@ class DashboardController extends AbstractDashboardController
             ]);
 
             yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
+
+            yield MenuItem::subMenu('Médias', 'fas fa-photo-video')->setSubItems([
+                MenuItem::linkToCrud('Médiathèque', 'fas fa-photo-video', Media::class),
+                MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Media::class)->setAction(Crud::PAGE_NEW),
+            ]);
         }
 
         if ($this->isGranted('ROLE_ADMIN')) {

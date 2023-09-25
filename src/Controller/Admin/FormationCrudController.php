@@ -22,7 +22,7 @@ class FormationCrudController extends AbstractCrudController
         yield TextField::new('name');
         yield SlugField::new('slug')->setTargetFieldName('name');
         yield TextEditorField::new('content');
-        yield TextField::new('media_filename');
+        yield AssociationField::new('featuredImage');
         yield AssociationField::new('id_category');
         yield DateField::new('date');
     }

@@ -3,11 +3,11 @@
 <article class="mb-5">
     <div class="row">
         <div class="col-md-{{leftCol ?? 5}}">
-            {# {% if article.media_filename %}
-                <a href="{{ article_show }}">
-                    <img src="/uploads/{{ article.media_filename }}" alt="" loading="lazy" width="350" height="205">
+            {% if article.featuredImage %}
+                <a href="{{ path('article_show', { 'slug': article.slug }) }}">
+                    <img src="/uploads/{{ article.featuredImage.filename }}" alt="{{ article.featuredImage.altText }}" loading="lazy" class="img-fluid">
                 </a>
-            {% endif %} #}
+            {% endif %}
         </div>
 
         <div class="col-md-{{rightCol ?? 7}}">

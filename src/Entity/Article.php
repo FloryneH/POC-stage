@@ -29,9 +29,6 @@ class Article implements TimestampedInterface
     #[ORM\Column(length: 500, nullable: true)]
     private ?string $featured_text = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $media_filename = null;
-
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt = null;
 
@@ -43,6 +40,9 @@ class Article implements TimestampedInterface
 
     #[ORM\OneToMany(mappedBy: 'article', targetEntity: Comment::class, orphanRemoval: true)]
     private Collection $comments;
+
+    #[ORM\ManyToOne(inversedBy: 'articles')]
+    private ?Media $featuredImage = null;
 
 
     public function __construct()
@@ -100,18 +100,6 @@ class Article implements TimestampedInterface
     public function setFeaturedText(?string $featured_text): static
     {
         $this->featured_text = $featured_text;
-
-        return $this;
-    }
-
-    public function getMediaFilename(): ?string
-    {
-        return $this->media_filename;
-    }
-
-    public function setMediaFilename(?string $media_filename): static
-    {
-        $this->media_filename = $media_filename;
 
         return $this;
     }
@@ -198,6 +186,18 @@ class Article implements TimestampedInterface
                 $comment->setArticle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFeaturedImage(): ?Media
+    {
+        return $this->featuredImage;
+    }
+
+    public function setFeaturedImage(?Media $featuredImage): static
+    {
+        $this->featuredImage = $featuredImage;
 
         return $this;
     }

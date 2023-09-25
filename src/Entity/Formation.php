@@ -28,9 +28,6 @@ class Formation
     #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $media_filename = null;
-
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'id_formation')]
     private Collection $id_category;
 
@@ -39,6 +36,9 @@ class Formation
 
     #[ORM\OneToMany(mappedBy: 'id_formation', targetEntity: Note::class)]
     private Collection $id_note;
+
+    #[ORM\ManyToOne(inversedBy: 'formations')]
+    private ?Media $featuredImage = null;
 
     public function __construct()
     {
@@ -96,18 +96,6 @@ class Formation
     public function setDate(?\DateTimeInterface $date): static
     {
         $this->date = $date;
-
-        return $this;
-    }
-
-    public function getMediaFilename(): ?string
-    {
-        return $this->media_filename;
-    }
-
-    public function setMediaFilename(?string $media_filename): static
-    {
-        $this->media_filename = $media_filename;
 
         return $this;
     }
@@ -189,6 +177,18 @@ class Formation
                 $idNote->setIdFormation(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getFeaturedImage(): ?Media
+    {
+        return $this->featuredImage;
+    }
+
+    public function setFeaturedImage(?Media $featuredImage): static
+    {
+        $this->featuredImage = $featuredImage;
 
         return $this;
     }

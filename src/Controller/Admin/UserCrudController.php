@@ -56,7 +56,8 @@ class UserCrudController extends AbstractCrudController
                 'Auteur' => 'ROLE_AUTHOR'
             ]);
         yield TextField::new('password')->onlyOnForms()
-            ->setFormType(PasswordType::class);
+        ->setFormType(PasswordType::class);
+        
         yield TextField::new('username');
         yield TextField::new('prenom');
         yield TextField::new('nom');
