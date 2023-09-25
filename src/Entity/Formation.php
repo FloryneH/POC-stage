@@ -31,7 +31,7 @@ class Formation
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $media_filename = null;
 
-    #[ORM\ManyToMany(targetEntity: Category::class, mappedBy: 'id_formation')]
+    #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'id_formation')]
     private Collection $id_category;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'id_formation')]

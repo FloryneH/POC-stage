@@ -24,7 +24,7 @@ class Category
     #[ORM\ManyToMany(targetEntity: Article::class, mappedBy: 'id_category')]
     private Collection $id_article;
 
-    #[ORM\ManyToMany(targetEntity: Formation::class, inversedBy: 'id_category')]
+    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'id_category')]
     private Collection $id_formation;
 
     public function __construct()
