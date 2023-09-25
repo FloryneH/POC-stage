@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use App\Entity\Comment;
 use App\Entity\Formation;
+use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -39,19 +40,30 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToRoute('Aller sur le site', 'fa fa-undo', 'app_home');
+
+        if ($this->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::subMenu('Utilisateurs', 'fas fa-user')->setSubItems([
+                MenuItem::linkToCrud('Tous les utlisateurs', 'fas fa-user-friends', User::class),
+                MenuItem::linkToCrud('Ajouter', 'fas fa-plus', User::class)->setAction(Crud::PAGE_NEW),
+            ]);
+        }
         
-        yield MenuItem::subMenu('Articles', 'fas fa-newspaper')->setSubItems([
-            MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
-            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
-        ]);
+        if ($this->isGranted('ROLE_AUTHOR')) {
+            yield MenuItem::subMenu('Articles', 'fas fa-newspaper')->setSubItems([
+                MenuItem::linkToCrud('Tous les articles', 'fas fa-newspaper', Article::class),
+                MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Article::class)->setAction(Crud::PAGE_NEW),
+            ]);
 
-        yield MenuItem::subMenu('Formations', 'fas fa-newspaper')->setSubItems([
-            MenuItem::linkToCrud('Toutes les formations', 'fas fa-newspaper', Formation::class),
-            MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Formation::class)->setAction(Crud::PAGE_NEW),
-        ]);
+            yield MenuItem::subMenu('Formations', 'fas fa-newspaper')->setSubItems([
+                MenuItem::linkToCrud('Toutes les formations', 'fas fa-newspaper', Formation::class),
+                MenuItem::linkToCrud('Ajouter', 'fas fa-plus', Formation::class)->setAction(Crud::PAGE_NEW),
+            ]);
 
-        yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
+            yield MenuItem::linkToCrud('Catégories', 'fas fa-list', Category::class);
+        }
 
-        yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
+        if ($this->isGranted('ROLE_ADMIN')) {
+            yield MenuItem::linkToCrud('Commentaires', 'fas fa-comment', Comment::class);
+        }
     }
 }

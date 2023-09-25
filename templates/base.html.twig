@@ -21,7 +21,9 @@
                 <a class="nav nav-link text-white" role="button" aria-expanded="false">Articles</a>
                 <a class="nav nav-link text-white" role="button" aria-expanded="false">Infos utiles</a>
                 <a class="nav nav-link text-white" role="button" aria-expanded="false">Contact</a>
-                <a href="{{path('admin')}}" class="nav nav-link text-white" role="button" aria-expanded="false">Tableau de bord</a>
+                {% if is_granted('ROLE_AUTHOR') %}
+                    <a href="{{path('admin')}}" class="nav nav-link text-white" role="button" aria-expanded="false">Tableau de bord</a>
+                {% endif %}
             </div>
         </nav>
 
