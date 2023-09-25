@@ -15,7 +15,11 @@
     <body>
         <nav class="py-2 bg-dark border-bottom">
             <div class="container d-flex flex-wrap justify-content-center">
+<<<<<<< HEAD
                 <a href="{{path('app_home')}}"class="nav nav-link text-white" role="button" aria-expanded="false">Accueil</a>
+=======
+                <a href="{{path('app_home')}}" class="nav nav-link text-white" role="button" aria-expanded="false">Accueil</a>
+>>>>>>> 03e282f6197ec40f194aac96c32a6b271e3ee1ef
                 <a class="nav nav-link text-white" role="button" aria-expanded="false">​À propos</a>
                 <a class="nav nav-link text-white" role="button" aria-expanded="false">Formation</a>
                 <a class="nav nav-link text-white" role="button" aria-expanded="false">Articles</a>
@@ -30,6 +34,7 @@
                 <a class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none" href="{{ path('app_home') }}">
                     <span class="fs-4">PasSage Avenir</span>
                 </a>
+<<<<<<< HEAD
 
                 {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
                     <ul class="nav nav-pills">
@@ -51,6 +56,25 @@
                             </li>
                         </ul>
                 {% endif %}
+=======
+                <ul class="nav nav-pills">
+                    {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{path('app_register')}}">S'inscrire</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" href="{{path('app_login')}}">Se connecter</a>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav nav-link text-dark" href="{{path('app_profile',{username: app.user.username} )}}">{{app.user.username|capitalize}}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav nav-link text-dark" href="{{path('app_logout')}}">Déconnexion</a>
+                        </li>
+                    {% endif %}
+                </ul>
+>>>>>>> 03e282f6197ec40f194aac96c32a6b271e3ee1ef
             </header>
         </div>
 
