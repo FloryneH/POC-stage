@@ -18,6 +18,9 @@
                 {{article.createdAt|date('d M Y')}}
             </p>
             {{article.featuredText ?: article.content|striptags|slice(0, 130) ~ '...'}}
+            <p>
+                <span class="badge bg-info">Article</span>
+            </p>
         </div>
     </div>
 </article>
