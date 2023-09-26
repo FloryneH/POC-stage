@@ -4,9 +4,18 @@
 
 {% block body %}
     <div class="container">
-        <h1>{{formation.name}}</h1>
-        <hr>
-        {{formation.content|raw}}
+        <div class="row">
+            <h1>{{formation.name}}</h1>
+            <hr>
 
+            {% if formation.featuredImage %}
+                <div class="col-md-4">
+                    <img src="/uploads/{{ formation.featuredImage.filename }}" alt="{{ formation.featuredImage.altText }}" loading="lazy" class="img-fluid h-100" style="width: 100%; height: 100%;">
+                </div>
+            {% endif %}
+            <div class="col-md-8">
+                {{formation.content|raw}}
+            </div>
+        </div>
     </div>
 {% endblock %}

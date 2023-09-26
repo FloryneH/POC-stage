@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<div class="container">
+    <div class="row">
+        {% for formation in formations %}
+            <div class="card m-auto p-0" style="max-width: 540px;">
+                <a class="text-decoration-none text-dark" href="{{ path('formation_show', { 'slug': formation.slug }) }}">
+                    <div class="row g-0">
+                        <div class="col-md-4">
+                            {% if formation.featuredImage %}
+                                <img src="/uploads/{{ formation.featuredImage.filename }}" alt="{{ formation.featuredImage.altText }}" loading="lazy" class="img-fluid h-100" style="width: 100%; height: 100%;">
+                            {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <h5 class="card-title">{{formation.name}}</h5>
+                                <p class="card-text">{{formation.content|striptags|slice(0, 130) ~ '...'}}</p>
+                                <p class="card-text">
+                                    <small class="text-body-secondary">{{formation.date|date('d M Y')}}</small>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
