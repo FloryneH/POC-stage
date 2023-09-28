@@ -25,3 +25,5 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+/config/secrets/client_secret_198506128859-38f0p7c1pla3m5eghsr8gnqd2vi6c576.apps.googleusercontent.com.json

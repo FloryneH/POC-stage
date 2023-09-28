@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Événements du calendrier{% endblock %}
+
+{% block body %}
+    <h1>Événements du calendrier</h1>
+
+    <ul>
+        {% for event in events %}
+            <li>
+                <strong>{{ event.summary }}</strong> - {{ event.start.dateTime|date('d/m/Y H:i') }} -
+                {{ event.end.dateTime|date('d/m/Y H:i') }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
+
