@@ -13,5 +13,40 @@
             </li>
         {% endfor %}
     </ul>
+
+    <div id='calendar' class="container"></div>
 {% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.9/index.global.min.js'></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            let calendarEl = document.getElementById('calendar');
+            let calendarEvents = [
+                {% for event in events %}
+                {
+                    title: "{{ event.summary }}",
+                    start: "2023-09-29T07:00:00",
+                    end: "2023-09-29T14:00:00"
+                },
+                {% endfor %}
+            ];
+
+            let calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'dayGridMonth',
+                events: calendarEvents,
+                eventContent: function(arg) {
+                    return {
+                        html: '<strong>' + arg.event.title + '</strong><br>' + arg.event.start.toLocaleString(),
+                    };
+                }
+            });
+
+            calendar.render();
+            
+        });
+    </script>
+{% endblock %}
+
 
